@@ -41,4 +41,4 @@
 
 ---
 
-<sub>auto-updated March 2026 · built by humans and gremlins 🦀</sub>
+<sub>auto-updated March 2026</sub>
