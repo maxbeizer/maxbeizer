@@ -14,6 +14,7 @@
   gh-contrib  A CLI extension for understanding your contributions on GitHub
   gh-extension-template  Template repo for Go-based gh CLI extensions
   gh-exts  Your extensions, extended
+  gh-ghostty  
   gh-hearth  🔥 A roaring fire for your terminal — a GitHub CLI extension
   gh-pagerduty  GitHub CLI extension for PagerDuty — check on-call status, v
   gh-rdm  Remote Development Manager - gh CLI extension for clipboard and open
@@ -27,6 +28,7 @@
 - [`gh-contrib`](https://github.com/maxbeizer/gh-contrib) — A CLI extension for understanding your contributions on GitHub
 - [`gh-extension-template`](https://github.com/maxbeizer/gh-extension-template) — Template repo for Go-based gh CLI extensions
 - [`gh-exts`](https://github.com/maxbeizer/gh-exts) — Your extensions, extended
+- [`gh-ghostty`](https://github.com/maxbeizer/gh-ghostty) — 
 - [`gh-hearth`](https://github.com/maxbeizer/gh-hearth) — 🔥 A roaring fire for your terminal — a GitHub CLI extension
 - [`gh-pagerduty`](https://github.com/maxbeizer/gh-pagerduty) — GitHub CLI extension for PagerDuty — check on-call status, view schedules, list incidents, and more
 - [`gh-rdm`](https://github.com/maxbeizer/gh-rdm) — Remote Development Manager - gh CLI extension for clipboard and open forwarding over SSH
