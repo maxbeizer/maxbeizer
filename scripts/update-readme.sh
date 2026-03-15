@@ -19,7 +19,12 @@ fi
 
 # Fetch recent activity
 echo "Fetching OSS activity (since ${SINCE})..."
-SUMMARY_JSON=$(gh oss summary --since "$SINCE" --format json --quiet 2>/dev/null || echo "[]")
+SUMMARY_JSON=$(gh oss summary --since "$SINCE" --format json --quiet 2>&1) || {
+  echo "⚠️  gh oss summary failed:"
+  echo "$SUMMARY_JSON"
+  echo "Skipping README update."
+  exit 0
+}
 
 # Check for empty results — no-op if nothing recent
 if [ "$SUMMARY_JSON" = "[]" ] || [ -z "$SUMMARY_JSON" ]; then
