@@ -5,6 +5,7 @@
 
 ---
 
+<!-- oss-start -->
 ### what i've been building lately
 
 **`gh` CLI extensions** — I've been building tools that live where I already work.
@@ -52,4 +53,5 @@
 
 ---
 
-<sub>auto-updated March 2026</sub>
+<sub>auto-updated 2026-03-15</sub>
+<!-- oss-end -->
