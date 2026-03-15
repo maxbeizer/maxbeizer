@@ -102,7 +102,7 @@ if start_idx == -1 or end_idx == -1:
 
 # Build updated content
 from datetime import datetime
-month_year = datetime.utcnow().strftime('%B %Y')
+month_year = datetime.utcnow().strftime('%Y-%m-%d')
 
 before = content[:start_idx + len(start_marker)]
 after = content[end_idx:]

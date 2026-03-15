@@ -53,5 +53,5 @@
 
 ---
 
-<sub>auto-updated March 2026</sub>
+<sub>auto-updated 2026-03-15</sub>
 <!-- oss-end -->
