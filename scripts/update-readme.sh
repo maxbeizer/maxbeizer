@@ -107,15 +107,7 @@ month_year = datetime.utcnow().strftime('%B %Y')
 before = content[:start_idx + len(start_marker)]
 after = content[end_idx:]
 
-updated = before + '\n' + new_content + '\n---\n\n' + after
-
-# Also update the auto-updated timestamp
-import re
-updated = re.sub(
-    r'<sub>auto-updated .*?</sub>',
-    f'<sub>auto-updated {month_year}</sub>',
-    updated
-)
+updated = before + '\n' + new_content + '\n---\n\n' + f'<sub>auto-updated {month_year}</sub>\n' + after
 
 with open(readme_path, 'w') as f:
     f.write(updated)
