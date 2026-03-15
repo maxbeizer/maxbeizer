@@ -57,15 +57,6 @@ lines.append('')
 if extensions:
     lines.append('**\`gh\` CLI extensions** — I\'ve been building tools that live where I already work.')
     lines.append('')
-    lines.append('\`\`\`')
-    for r in sorted(extensions, key=lambda x: short_name(x['name'])):
-        name = short_name(r['name'])
-        desc = r.get('description', '') or ''
-        if len(desc) > 65:
-            desc = desc[:62] + '...'
-        lines.append(f'  {name}  {desc}')
-    lines.append('\`\`\`')
-    lines.append('')
     for r in sorted(extensions, key=lambda x: short_name(x['name'])):
         name = short_name(r['name'])
         desc = r.get('description', '') or ''
