@@ -19,7 +19,7 @@ fi
 
 # Fetch recent activity
 echo "Fetching OSS activity (since ${SINCE})..."
-SUMMARY_JSON=$(gh oss summary --since "$SINCE" --format json 2>/dev/null || echo "[]")
+SUMMARY_JSON=$(gh oss summary --since "$SINCE" --format json --quiet 2>/dev/null || echo "[]")
 
 # Check for empty results — no-op if nothing recent
 if [ "$SUMMARY_JSON" = "[]" ] || [ -z "$SUMMARY_JSON" ]; then
@@ -28,7 +28,7 @@ if [ "$SUMMARY_JSON" = "[]" ] || [ -z "$SUMMARY_JSON" ]; then
 fi
 
 # Build markdown from JSON
-# Expected JSON shape: [{"name": "repo", "description": "...", "url": "...", "pushedAt": "...", "activityType": "..."}]
+# Expected JSON shape: [{"name": "owner/repo", "description": "...", "url": "...", "last_push_date": "...", "activity_type": "..."}]
 MARKDOWN=$(echo "$SUMMARY_JSON" | python3 -c "
 import json, sys
 from datetime import datetime
@@ -37,9 +37,13 @@ repos = json.load(sys.stdin)
 if not repos:
     sys.exit(0)
 
+def short_name(full_name):
+    \"\"\"Extract repo name from 'owner/repo' format.\"\"\"
+    return full_name.split('/')[-1] if '/' in full_name else full_name
+
 # Separate gh extensions from other repos
-extensions = [r for r in repos if r.get('name', '').startswith('gh-')]
-others = [r for r in repos if not r.get('name', '').startswith('gh-')]
+extensions = [r for r in repos if short_name(r.get('name', '')).startswith('gh-')]
+others = [r for r in repos if not short_name(r.get('name', '')).startswith('gh-')]
 
 lines = []
 lines.append('### what i\'ve been building lately')
@@ -49,27 +53,29 @@ if extensions:
     lines.append('**\`gh\` CLI extensions** — I\'ve been building tools that live where I already work.')
     lines.append('')
     lines.append('\`\`\`')
-    for r in sorted(extensions, key=lambda x: x['name']):
+    for r in sorted(extensions, key=lambda x: short_name(x['name'])):
+        name = short_name(r['name'])
         desc = r.get('description', '') or ''
-        # Truncate long descriptions for the code block
         if len(desc) > 65:
             desc = desc[:62] + '...'
-        lines.append(f\"  {r['name']}  {desc}\")
+        lines.append(f'  {name}  {desc}')
     lines.append('\`\`\`')
     lines.append('')
-    for r in sorted(extensions, key=lambda x: x['name']):
+    for r in sorted(extensions, key=lambda x: short_name(x['name'])):
+        name = short_name(r['name'])
         desc = r.get('description', '') or ''
-        url = r.get('url', f\"https://github.com/maxbeizer/{r['name']}\")
-        lines.append(f\"- [\`{r['name']}\`]({url}) — {desc}\")
+        url = r.get('url', f'https://github.com/{r[\"name\"]}')
+        lines.append(f'- [\`{name}\`]({url}) — {desc}')
     lines.append('')
 
 if others:
     lines.append('**other recent work**')
     lines.append('')
-    for r in sorted(others, key=lambda x: x['name']):
+    for r in sorted(others, key=lambda x: short_name(x['name'])):
+        name = short_name(r['name'])
         desc = r.get('description', '') or ''
-        url = r.get('url', f\"https://github.com/maxbeizer/{r['name']}\")
-        lines.append(f\"- [\`{r['name']}\`]({url}) — {desc}\")
+        url = r.get('url', f'https://github.com/{r[\"name\"]}')
+        lines.append(f'- [\`{name}\`]({url}) — {desc}')
     lines.append('')
 
 print('\n'.join(lines))
@@ -101,8 +107,8 @@ if start_idx == -1 or end_idx == -1:
     sys.exit(0)
 
 # Build updated content
-from datetime import datetime
-month_year = datetime.utcnow().strftime('%Y-%m-%d')
+from datetime import datetime, timezone
+month_year = datetime.now(timezone.utc).strftime('%Y-%m-%d')
 
 before = content[:start_idx + len(start_marker)]
 after = content[end_idx:]
