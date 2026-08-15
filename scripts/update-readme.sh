@@ -7,23 +7,28 @@ set -euo pipefail
 
 README="${1:-README.md}"
 SINCE="${2:-30d}"
+OSS_USER="${3:-${GITHUB_REPOSITORY_OWNER:-}}"
 
 # Ensure gh-oss extension is available
-if ! gh extension list 2>/dev/null | grep -q "oss"; then
+if ! gh extension list 2>/dev/null | grep -E '^gh[[:space:]]+oss[[:space:]]' >/dev/null; then
   echo "Installing gh-oss extension..."
   gh extension install maxbeizer/gh-oss || {
-    echo "⚠️  Failed to install gh-oss. Skipping README update."
-    exit 0
+    echo "Failed to install gh-oss."
+    exit 1
   }
 fi
 
 # Fetch recent activity
 echo "Fetching OSS activity (since ${SINCE})..."
-SUMMARY_JSON=$(gh oss summary --since "$SINCE" --format json --quiet 2>&1) || {
-  echo "⚠️  gh oss summary failed:"
+SUMMARY_ARGS=(--since "$SINCE" --format json --quiet)
+if [ -n "$OSS_USER" ]; then
+  SUMMARY_ARGS+=(--user "$OSS_USER")
+fi
+
+SUMMARY_JSON=$(gh oss summary "${SUMMARY_ARGS[@]}" 2>&1) || {
+  echo "gh oss summary failed:"
   echo "$SUMMARY_JSON"
-  echo "Skipping README update."
-  exit 0
+  exit 1
 }
 
 # Check for empty results — no-op if nothing recent

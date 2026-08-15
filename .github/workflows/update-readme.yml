@@ -26,7 +26,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           chmod +x scripts/update-readme.sh
-          ./scripts/update-readme.sh README.md 7d
+          ./scripts/update-readme.sh README.md 7d "$GITHUB_REPOSITORY_OWNER"
 
       - name: Check for changes
         id: changes
