@@ -15,10 +15,9 @@
 
 **other recent work**
 
-- [`dotfiles`](https://github.com/maxbeizer/dotfiles) — ermahgerd! dertfiles!!!
-- [`home_maintenance`](https://github.com/maxbeizer/home_maintenance) — A GitHub Action to open issues for various seasonal home maintenance tasks
 - [`maxbeizer`](https://github.com/maxbeizer/maxbeizer) — 
+- [`yiddish.fyi`](https://github.com/maxbeizer/yiddish.fyi) — A public API for Yiddish words. Oy, it's free!
 ---
 
-<sub>auto-updated 2026-08-15</sub>
+<sub>auto-updated 2026-08-21</sub>
 <!-- oss-end -->
