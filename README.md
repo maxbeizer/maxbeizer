@@ -11,13 +11,11 @@
 **`gh` CLI extensions** — I've been building tools that live where I already work.
 
 - [`gh-fleet`](https://github.com/maxbeizer/gh-fleet) — @maxbeizer's gh CLI extensions in one place
-- [`gh-yt2md`](https://github.com/maxbeizer/gh-yt2md) — YouTube to Markdown - gh CLI extension
 
 **other recent work**
 
-- [`maxbeizer`](https://github.com/maxbeizer/maxbeizer) — 
-- [`yiddish.fyi`](https://github.com/maxbeizer/yiddish.fyi) — A public API for Yiddish words. Oy, it's free!
+- [`edge-last-tab`](https://github.com/maxbeizer/edge-last-tab) — A permission-minimal Edge extension for switching to the previous tab. That's it
 ---
 
-<sub>auto-updated 2026-08-21</sub>
+<sub>auto-updated 2026-09-04</sub>
 <!-- oss-end -->
