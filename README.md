@@ -15,10 +15,8 @@
 
 **other recent work**
 
-- [`edge-last-tab`](https://github.com/maxbeizer/edge-last-tab) — A permission-minimal Edge extension for switching to the previous tab. That's it
-- [`edge-tab-renamer`](https://github.com/maxbeizer/edge-tab-renamer) — Rename tabs in Edge like good browsers allow
 - [`maxbeizer`](https://github.com/maxbeizer/maxbeizer) — 
 ---
 
-<sub>auto-updated 2026-09-11</sub>
+<sub>auto-updated 2026-09-18</sub>
 <!-- oss-end -->
